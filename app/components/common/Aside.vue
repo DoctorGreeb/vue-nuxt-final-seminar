@@ -81,11 +81,9 @@ const priceFrom = ref('')
 const priceTo = ref('')
 const inStock = ref(false)
 
-// Инициализация полей ввода
 priceFrom.value = minValue.value.toString()
 priceTo.value = maxValue.value.toString()
 
-// Вычисляем стиль для слайдер-трека
 const sliderTrackStyle = computed(() => {
   const left = ((minValue.value - minPrice.value) / (maxPrice.value - minPrice.value)) * 100
   const right = ((maxValue.value - minPrice.value) / (maxPrice.value - minPrice.value)) * 100
@@ -97,7 +95,6 @@ const sliderTrackStyle = computed(() => {
   }
 })
 
-// Обновление поля "от" при движении левого слайдера
 const updatePriceFromSlider = () => {
   if (minValue.value > maxValue.value) {
     minValue.value = maxValue.value
@@ -105,7 +102,6 @@ const updatePriceFromSlider = () => {
   priceFrom.value = minValue.value.toString()
 }
 
-// Обновление поля "до" при движении правого слайдера
 const updatePriceToSlider = () => {
   if (maxValue.value < minValue.value) {
     maxValue.value = minValue.value
@@ -113,7 +109,6 @@ const updatePriceToSlider = () => {
   priceTo.value = maxValue.value.toString()
 }
 
-// Обновление слайдера при вводе в поле "от"
 const updateSliderFromInput = () => {
   let value = parseInt(priceFrom.value) || minPrice.value
   if (value < minPrice.value) value = minPrice.value
@@ -122,7 +117,6 @@ const updateSliderFromInput = () => {
   priceFrom.value = value.toString()
 }
 
-// Обновление слайдера при вводе в поле "до"
 const updateSliderToInput = () => {
   let value = parseInt(priceTo.value) || maxPrice.value
   if (value > maxPrice.value) value = maxPrice.value
