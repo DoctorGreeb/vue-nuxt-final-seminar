@@ -1,4 +1,5 @@
 <template>
+    <CommonAside />
   <div class="products-grid">
     <div v-if="pending">Загрузка...</div>
     <div v-else v-for="p in products" :key="p.id" class="product-card">
@@ -28,6 +29,7 @@
 
     </div>
   </div>
+
 </template>
 
 <script setup>
