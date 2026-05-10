@@ -53,9 +53,16 @@ export const useApi = (): UseApiReturn => {
   };
 
   // Изображения
-  const getImageUrl = (imagePath: string): string => {
-    return `http://localhost:1452/image/${imagePath}`;
-  };
+  const getImageUrl = (imagePath: string | null | undefined): string => {
+  if (!imagePath) return '';
+  
+  // Если уже начинается с /image/, не добавляем ещё раз
+  if (imagePath.startsWith('image/')) {
+    return `http://localhost:1452/${imagePath}`;
+  }
+  
+  return `http://localhost:1452/image/${imagePath}`;
+};
 
   return {
     getAllProducts,
