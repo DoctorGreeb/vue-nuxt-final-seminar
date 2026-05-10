@@ -4,8 +4,13 @@
     <div v-else v-for="p in products" :key="p.id" class="product-card">
 
 
-      <img :src="p.images?.length ? getImageUrl(p.images[0]) : '/no-photo.png'" :alt="p.name" loading="lazy"
-        @error="(e) => e.target.src = '/no-photo.png'" />
+      <img v-if="p.images && p.images.length > 0" :src="getImageUrl(p.images[0])" :alt="p.name" loading="lazy" @error="(e) => {
+        const img = e.target;
+        img.src = '/no-photo.png';
+        img.classList.add('fallback-image');
+      }" />
+      
+      <div v-else class="no-image">Нет фото</div>
 
       <p class="compact-p">{{ p.brand + ' ' + (p.name || p.Product_name) + ' ' + p.characteristics[1].value +
         (p.characteristics[1].unit_type === "значение" ? "" : p.characteristics[1].unit_type) }}</p>
@@ -109,5 +114,20 @@ console.log(products.value?.[0])
   font-size: 1rem;
   cursor: not-allowed;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.p-name {
+  &:hover {
+    position: relative;
+    bottom: 0;
+    white-space: normal;
+    overflow: visible;
+    max-height: 200px;
+    z-index: 10;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
 }
 </style>
