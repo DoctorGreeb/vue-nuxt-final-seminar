@@ -1,15 +1,23 @@
 export interface Product {
   id: number;
   name: string;
+  Product_name?: string;
   description?: string;
   price: number;
-  image?: string;
-  categoryId: number;
+  images?: string[];
+  brand?: string;
+  characteristics: Characteristic[];
+  color?: string;
+  is_available?: boolean;
+  categoryId?: number;
   subcategoryId?: number;
   createdAt?: string;
   updatedAt?: string;
-  inStock?: boolean;
-  rating?: number;
+}
+
+export interface Characteristic {
+  value: string | number;
+  unit_type: string;
 }
 
 export interface Category {
