@@ -2,9 +2,9 @@
   <header>
     <div class="header-wrapper">
       <div class="bar">
-        <div class="logo">
-          <img src="/Logo.png" alt="logo">
-        </div>
+        <NuxtLink to="/" class="category-item logo">
+          <img src="/Logo.png" alt="phones">
+        </NuxtLink>
         <div class="navbar">
           <img class="search-icon" src="/buttons/Search.png" alt="search-icon">
           <input type="search" placeholder="Search">
@@ -29,8 +29,6 @@
 
 
 <style scoped>
-
-
 input[type="search"]::placeholder {
   font-size: 10px;
   font-style: italic;

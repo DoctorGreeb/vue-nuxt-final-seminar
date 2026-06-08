@@ -1,12 +1,13 @@
 <template>
-  <CommonAside />
   <CommonArticle />
   <CommonAds />
   <CommonCategory />
   <CommonTags />
   <CommonMain />
-  <CommonBanners />
+  <CommonBanners />  
+  <CommonDiscountProducts />
   <CommonBannerBig />
+
 
 </template>
 

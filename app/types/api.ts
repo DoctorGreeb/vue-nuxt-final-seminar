@@ -13,6 +13,7 @@ export interface Product {
   subcategoryId?: number;
   createdAt?: string;
   updatedAt?: string;
+  category?: string;
 }
 
 export interface Characteristic {

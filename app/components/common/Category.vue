@@ -10,30 +10,35 @@
             </div>
 
             <div class="category-list">
-                <div class="category-item">
+                <NuxtLink to="/products/phones" class="category-item">
                     <img src="/buttons/Phones.png" alt="phones">
                     <p class="italic">Phones</p>
-                </div>
-                <div class="category-item">
+                </NuxtLink>
+                
+                <NuxtLink to="/products/smart-watches" class="category-item">
                     <img src="/buttons/Smart Watches.png" alt="swatches">
                     <p class="italic">Smart Watches</p>
-                </div>
-                <div class="category-item">
+                </NuxtLink>
+                
+                <NuxtLink to="/products/cameras" class="category-item">
                     <img src="/buttons/Cameras.png" alt="cams">
                     <p class="italic">Cameras</p>
-                </div>
-                <div class="category-item">
+                </NuxtLink>
+                
+                <NuxtLink to="/products/headphones" class="category-item">
                     <img src="/buttons/Headphones.png" alt="heads">
                     <p class="italic">Headphones</p>
-                </div>
-                <div class="category-item">
+                </NuxtLink>
+                
+                <NuxtLink to="/products/computers" class="category-item">
                     <img src="/buttons/Computers.png" alt="pc">
                     <p class="italic">Computers</p>
-                </div>
-                <div class="category-item">
+                </NuxtLink>
+                
+                <NuxtLink to="/products/accessories" class="category-item">
                     <img src="/buttons/Gaming.png" alt="gmng">
-                    <p class="italic">Gaming</p>
-                </div>
+                    <p class="italic">Accessories</p>
+                </NuxtLink>
             </div>
         </div>
     </div>
@@ -83,6 +88,14 @@
     background-color: rgba(237, 237, 237, 1);
     min-width: 160px;
     height: 128px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .arrow-right {
