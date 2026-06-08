@@ -14,11 +14,13 @@ export interface Product {
   createdAt?: string;
   updatedAt?: string;
   category?: string;
+  discount_price?: number;
 }
 
 export interface Characteristic {
   value: string | number;
   unit_type: string;
+  characteristic?: string;
 }
 
 export interface Category {
@@ -58,5 +60,5 @@ export interface UseApiReturn {
   
   getProductsBySubcategoryId: (subcategoryId: number) => Promise<ProductsBySubcategoryResponse>;
   
-  getImageUrl: (imagePath: string) => string;
+getImageUrl: (imagePath: string | null | undefined) => string;
 }

@@ -10,17 +10,18 @@
       }">
         <div class="banners-card-img">
           <div class="banners-card-img-content">
-            <img v-if="p.images && p.images.length > 0" :src="getImageUrl(p.images[0]!)" :alt="p.name" loading="lazy"
-              @error="(e: Event) => {
-                const img = e.target as HTMLImageElement;
-                img.src = '/no-photo.png';
-                img.classList.add('fallback-image');
-              }" />
+            <img 
+              v-if="p.images && p.images.length > 0" 
+              :src="getImageUrl(p.images[0])" 
+              :alt="p.name"
+              loading="lazy" 
+              @error="handleImageError"
+            />
             <div v-else class="no-image">Нет фото</div>
+            
             <p v-if="index === 0" class="compact-p italic33">Popular Products</p>
             <p v-else class="compact-p italic33">
-              {{ p.brand + ' ' + (p.name || p.Product_name) + ' ' +
-                (p.characteristics?.[1]?.value || '') }}
+              {{ p.brand + ' ' + (p.name || p.Product_name) }}
             </p>
           </div>
           <div class="banners-desc">
@@ -28,8 +29,9 @@
             <p v-if="index !== 0" class="price">{{ p.price }} ₽</p>
           </div>
         </div>
+
         <div v-if="p.is_available" class="buy-btn">
-          <button>Shop now</button>
+          <button @click.stop="addToCart(p)">Купить</button>
         </div>
         <div v-else class="out-of-stock-btn">
           <button disabled>Out of stock</button>
@@ -40,6 +42,10 @@
 </template>
 
 <script setup lang="ts">
+const { getAllProducts, getImageUrl } = useApi()
+const { addToCart } = useCart()
+
+const { data: products, pending } = await useAsyncData(getAllProducts)
 
 const categoryTexts: Record<string, string[]> = {
   'Смартфоны': [
@@ -80,16 +86,11 @@ const categoryTexts: Record<string, string[]> = {
   ]
 }
 
-
 const getProductText = (p: any, index: number) => {
   if (index === 0 && p.category !== 'Смартфоны') return 'Popular Products'
   if (categoryTexts[p.category]?.[index]) return categoryTexts[p.category]![index]
-
-  return `${p.brand} ${p.name || p.Product_name} ${p.characteristics?.[1]?.value || ''}${p.characteristics?.[1]?.unit_type === 'значение' ? '' : p.characteristics?.[1]?.unit_type || ''}`
+  return `${p.brand} ${p.name || p.Product_name}`
 }
-
-const { getAllProducts, getImageUrl } = useApi()
-const { data: products, pending } = await useAsyncData(getAllProducts)
 
 const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array]
@@ -102,11 +103,15 @@ const shuffleArray = <T>(array: T[]): T[] => {
   return shuffled
 }
 
-// Вычисляемое свойство с перемешанными товарами
 const randomProducts = computed(() => {
   if (!products.value) return []
   return shuffleArray(products.value).slice(0, 4)
 })
+
+const handleImageError = (e: Event) => {
+  const img = e.target as HTMLImageElement
+  img.src = '/no-photo.png'
+}
 </script>
 
 <style scoped>

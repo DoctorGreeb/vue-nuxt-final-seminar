@@ -244,30 +244,30 @@
                     </div>
 
                     <div class="desc">
-                        <p class="desc-text">{{ getCategoryDescription(product.category) }}</p>
+                        <p class="desc-text">{{ getCategoryDescription(product.category || '') }}</p>
                     </div>
 
                 </div>
 
                 <div class="availability-block">
                     <div class="wishilst">
-                        <button class="wishlist-button">
+                        <button class="wishlist-button" @click="toggleWishlist(product)">
                             Add to Wishlist
                         </button>
                     </div>
                     <div v-if="product.is_available" class="availability">
                         <div class="buy-button-block">
-                        <button class="buy-button" :disabled="!product.is_available">
-                            Купить
-                        </button>
-                    </div>
+                            <button class="buy-button" :disabled="!product.is_available">
+                                Купить
+                            </button>
+                        </div>
                     </div>
                     <div v-else class="availability out-of-stock">
                         Нет в наличии
                     </div>
 
 
-                    
+
                 </div>
             </div>
         </div>
@@ -302,7 +302,7 @@ const route = useRoute()
 const { getAllProducts, getImageUrl } = useApi()
 
 const { data: allProducts, pending } = await useAsyncData('all-products', getAllProducts)
-
+const { toggleWishlist } = useWishlist()
 const productId = Number(route.params.id)
 const product = computed(() =>
     allProducts.value?.find((p: any) => p.id === productId)
@@ -327,7 +327,6 @@ const getCategoryDescription = (category: string): string => {
 </script>
 
 <style scoped>
-
 h1 {
     font-family: "ABeeZee", sans-serif;
 }
@@ -447,7 +446,7 @@ h1 {
 
 }
 
-.wishlist-button{
+.wishlist-button {
     color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -536,7 +535,8 @@ h1 {
     font-size: 16px;
 }
 
-.size15, .size16 {
+.size15,
+.size16 {
     font-family: 'Roboto', sans-serif;
 }
 

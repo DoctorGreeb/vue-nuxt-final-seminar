@@ -1,4 +1,3 @@
-// composables/useApi.ts
 import type { 
   Product,
   ProductsResponse,
@@ -51,14 +50,14 @@ export const useApi = (): UseApiReturn => {
   };
 
   const getImageUrl = (imagePath: string | null | undefined): string => {
-  if (!imagePath) return '';
-  
-  if (imagePath.startsWith('image/')) {
-    return `http://localhost:1452/${imagePath}`;
-  }
-  
-  return `http://localhost:1452/image/${imagePath}`;
-};
+    if (!imagePath) return '/no-photo.png';
+    
+    if (imagePath.startsWith('image/')) {
+      return `http://localhost:1452/${imagePath}`;
+    }
+    
+    return `http://localhost:1452/image/${imagePath}`;
+  };
 
   return {
     getAllProducts,
